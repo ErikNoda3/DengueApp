@@ -5,14 +5,13 @@ import { Input } from "@/components/input"
 
 export default function Index() {
 
-    function handleLogin() {
-        router.navigate("/home")
-    }
-
     return (
         <View style={styles.container}>
             <Text style={styles.title}>OPÇÕES</Text>
-            <InitialButton title="Login" onPress={handleLogin} />
+            <InitialButton title="Tratamento" />
+            <InitialButton title="LI + T" />
+            <InitialButton title="Sair" onPress={() => { router.back() }} />
+            <Input />
         </View>
     )
 }
