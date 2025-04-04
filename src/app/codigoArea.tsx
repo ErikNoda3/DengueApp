@@ -2,15 +2,17 @@ import { View, Text, StyleSheet } from "react-native"
 import { router } from "expo-router"
 import { InitialButton } from "@/components/initialButton"
 import { Input } from "@/components/input"
+import { Opcoes } from "@/components/opcoes"
 
-export default function Index() {
+export default function CodigoArea() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
-            <Input placeholder="Usuário" />
-            <Input placeholder="Senha" autoComplete="password" secureTextEntry />
-            <InitialButton title="Entrar" onPress={() => { router.navigate("/home") }} />
+            <Text style={styles.title}>Insira o codigo da área</Text>
+            <Input placeholder="Codigo" />
+            <Opcoes />
+            <InitialButton title="Entrar" onPress={() => { router.navigate("./mapas") }} />
+            <InitialButton title="Voltar" onPress={() => { router.back() }} />
         </View>
     )
 }

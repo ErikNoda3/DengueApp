@@ -1,17 +1,15 @@
 import { View, Text, StyleSheet } from "react-native"
 import { router } from "expo-router"
 import { InitialButton } from "@/components/initialButton"
-import { Input } from "@/components/input"
 
-export default function Index() {
+export default function Home() {
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>OPÇÕES</Text>
-            <InitialButton title="Tratamento" />
-            <InitialButton title="LI + T" />
+            <InitialButton title="Tratamento" onPress={() => { router.navigate("/codigoArea") }} />
+            <InitialButton title="LI + T" onPress={() => { router.navigate("/codigoArea") }} />
             <InitialButton title="Sair" onPress={() => { router.back() }} />
-            <Input />
         </View>
     )
 }

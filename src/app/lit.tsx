@@ -1,16 +1,13 @@
 import { View, Text, StyleSheet } from "react-native"
 import { router } from "expo-router"
 import { InitialButton } from "@/components/initialButton"
-import { Input } from "@/components/input"
 
-export default function Index() {
+export default function Lit() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
-            <Input placeholder="Usuário" />
-            <Input placeholder="Senha" autoComplete="password" secureTextEntry />
-            <InitialButton title="Entrar" onPress={() => { router.navigate("/home") }} />
+            <Text style={styles.title}>Levantamento de indices</Text>
+            <InitialButton title="Voltar" onPress={() => { router.back() }} />
         </View>
     )
 }
