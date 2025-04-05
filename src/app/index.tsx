@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from "react-native"
 import { router } from "expo-router"
-import { InitialButton } from "@/components/initialButton"
+import { InitialButton } from "@/components/Buttons/initialButton"
 import { Input } from "@/components/input"
+import { styles } from "./styles"
 
 export default function Index() {
 
@@ -14,18 +15,3 @@ export default function Index() {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 32,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 16
-    },
-    title: {
-        color: "#453467",
-        fontSize: 24,
-        fontWeight: "bold"
-    }
-})

@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import colors from "@/constants/colors";
 
 export const styles = StyleSheet.create({
   button: {
     width: "50%",
     height: 52,
-    backgroundColor: "#9FB3DF",
+    backgroundColor: colors.primary,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -13,6 +14,6 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "black",
+    color: colors.textLight,
   },
 });

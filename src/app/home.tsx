@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from "react-native"
 import { router } from "expo-router"
-import { InitialButton } from "@/components/initialButton"
+import { InitialButton } from "@/components/Buttons/initialButton"
+import { BackButton } from "@/components/Buttons/backButton"
+import { styles } from "./styles"
 
 export default function Home() {
 
@@ -9,22 +11,7 @@ export default function Home() {
             <Text style={styles.title}>OPÇÕES</Text>
             <InitialButton title="Tratamento" onPress={() => { router.navigate("/codigoArea") }} />
             <InitialButton title="LI + T" onPress={() => { router.navigate("/codigoArea") }} />
-            <InitialButton title="Sair" onPress={() => { router.back() }} />
+            <BackButton title="Sair" onPress={() => { router.back() }} />
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 32,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 16
-    },
-    title: {
-        color: "#453467",
-        fontSize: 24,
-        fontWeight: "bold"
-    }
-})

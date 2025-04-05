@@ -22,8 +22,8 @@ export function Opcoes() {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder="Select item"
-            searchPlaceholder="Search..."
+            placeholder="Selecionar área"
+            searchPlaceholder="Digite..."
             value={value}
             onChange={item => {
                 setValue(item.value);

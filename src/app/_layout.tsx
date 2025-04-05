@@ -16,7 +16,7 @@ export default function MainLayout() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="mapas"
+                name="mapaJdEsperanca"
                 options={{ headerShown: false }}
             />
             <Stack.Screen

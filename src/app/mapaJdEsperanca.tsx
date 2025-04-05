@@ -1,7 +1,8 @@
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native"
 import { router } from "expo-router"
-import { MapsButton } from "@/components/mapsButton"
-import { InitialButton } from "@/components/initialButton"
+import { MapsButton } from "@/components/Buttons/mapsButton"
+import { InitialButton } from "@/components/Buttons/initialButton"
+import { BackButton } from "@/components/Buttons/backButton"
 
 
 export default function Mapas() {
@@ -22,7 +23,7 @@ export default function Mapas() {
                 <View style={styles.buttons}>
                     {items}
                 </View>
-                <InitialButton title="Voltar" onPress={() => { router.back() }} />
+                <BackButton title="Voltar" onPress={() => { router.back() }} />
             </View>
         </ScrollView>
     )
