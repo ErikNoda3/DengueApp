@@ -1,24 +1,22 @@
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native"
 import { router } from "expo-router"
 import { MapsButton } from "@/components/Buttons/mapsButton"
-import { InitialButton } from "@/components/Buttons/initialButton"
 import { BackButton } from "@/components/Buttons/backButton"
-
 
 export default function Mapas() {
     const items = []
 
 
-    for (let i = 1; i <= 37; i++) {
-        items.push(<MapsButton key={i} title={i.toString()} onPress={() => { router.navigate("/lit") }} />)
+    for (let i = 1; i <= 45; i++) {
+        items.push(<MapsButton key={i} title={i.toString()} onPress={() => { router.navigate("/opcoes") }} />)
     }
 
     return (
 
         <ScrollView style={styles.scrollContainer}>
             <View style={styles.innerContainer}>
-                <Text style={styles.title}>Mapa Jardim Esperança</Text>
-                <Image style={styles.img} source={require('../../assets/images/mapa1_Jd_Esperanca.jpg')} />
+                <Text style={styles.title}>Mapa 6</Text>
+                <Image style={styles.img} source={require('../../assets/images/mapa6.jpg')} />
                 <Text style={styles.choice}>Selecione o quarteirão</Text>
                 <View style={styles.buttons}>
                     {items}

@@ -11,7 +11,7 @@ export default function Index() {
             <Text style={styles.title}>Login</Text>
             <Input placeholder="Usuário" />
             <Input placeholder="Senha" autoComplete="password" secureTextEntry />
-            <InitialButton title="Entrar" onPress={() => { router.navigate("/home") }} />
+            <InitialButton title="Entrar" onPress={() => { router.navigate("/codigoArea") }} />
         </View>
     )
 }

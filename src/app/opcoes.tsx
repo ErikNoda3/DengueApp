@@ -9,8 +9,8 @@ export default function Home() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>OPÇÕES</Text>
-            <InitialButton title="Tratamento" onPress={() => { router.navigate("/codigoArea") }} />
-            <InitialButton title="LI + T" onPress={() => { router.navigate("/codigoArea") }} />
+            <InitialButton title="Tratamento" onPress={() => { router.navigate("/tratamento") }} />
+            <InitialButton title="LI + T" onPress={() => { router.navigate("/lit") }} />
             <BackButton title="Sair" onPress={() => { router.back() }} />
         </View>
     )

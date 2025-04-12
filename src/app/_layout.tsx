@@ -8,15 +8,39 @@ export default function MainLayout() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="home"
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
                 name="codigoArea"
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="mapaJdEsperanca"
+                name="mapa1"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa2"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa3"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa4"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa5"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa6"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="mapa7"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="opcoes"
                 options={{ headerShown: false }}
             />
             <Stack.Screen
