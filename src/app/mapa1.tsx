@@ -8,7 +8,7 @@ export default function Mapas() {
 
 
     for (let i = 1; i <= 37; i++) {
-        items.push(<MapsButton key={i} title={i.toString()} onPress={() => { router.navigate("/opcoes") }} />)
+        items.push(<MapsButton key={i} title={i.toString()} onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i } })} />)
     }
 
     return (

@@ -6,6 +6,11 @@ export const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
   },
+  quarteiraoText: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  //
   container: {
     flex: 1,
     backgroundColor: colors.background,

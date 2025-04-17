@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { router } from "expo-router"
 import { InitialButton } from "@/components/Buttons/initialButton"
 import { styles } from "./styles"
-import { Opcoes } from "@/components/opcoes"
+import { Opcoes } from "@/components/dropdowns/opcoes"
 import { BackButton } from "@/components/Buttons/backButton"
 
 export default function CodigoArea() {
