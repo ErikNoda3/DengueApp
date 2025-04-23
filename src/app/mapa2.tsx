@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%"
     },
     title: {
         padding: 15,

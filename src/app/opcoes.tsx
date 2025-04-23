@@ -12,7 +12,7 @@ export default function Opcoes() {
             <Text style={styles.title}>Quarteirão selecionado: {quarteirao}</Text>
             <Text style={styles.title}>Opções</Text>
             <InitialButton title="Tratamento" onPress={() => { router.navigate("/tratamento") }} />
-            <InitialButton title="LI + T" onPress={() => router.push({ pathname: "/lit", params: { quarteirao: quarteirao } })} />
+            <InitialButton title="Levantamento de indices" onPress={() => router.push({ pathname: "/lit", params: { quarteirao: quarteirao } })} />
             <BackButton title="Sair" onPress={() => { router.back() }} />
         </View>
     )

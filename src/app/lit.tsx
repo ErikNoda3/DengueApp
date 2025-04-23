@@ -8,6 +8,8 @@ import { InitialButton } from "@/components/Buttons/initialButton"
 import * as FileSystem from 'expo-file-system'
 import * as Sharing from 'expo-sharing'
 import { TipoImovel } from "@/components/dropdowns/tipoImovel"
+import { Visita } from "@/components/dropdowns/visita"
+import { Pendencia } from "@/components/dropdowns/pendencia"
 
 
 type Registro = {
@@ -19,6 +21,8 @@ type Registro = {
     complemento: string;
     tipo: string;
     hora: string;
+    visita: string;
+    pendencia: string;
 };
 
 export default function Lit() {
@@ -31,11 +35,14 @@ export default function Lit() {
     const [complemento, setComplemento] = useState('')
     const [tipo, setTipo] = useState('');
     const [hora, setHora] = useState('');
+    const [visita, setVisita] = useState('');
+    const [pendencia, setPendencia] = useState('')
+
     const [registros, setRegistros] = useState<Registro[]>([])
 
     // =====================================================================================================================
     function salvarRegistro() {
-        if (!quarteirao || !sequencia || !lado || !numero) {
+        if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
             Alert.alert("Campos sem informação", "Preencha todos os campos")
             return
         }
@@ -50,6 +57,8 @@ export default function Lit() {
             complemento,
             tipo,
             hora,
+            visita,
+            pendencia
         };
 
         setRegistros((prev) => [...prev, novoRegistro])
@@ -62,6 +71,8 @@ export default function Lit() {
         setComplemento('');
         setTipo('');
         setHora('');
+        setVisita('');
+        setPendencia('')
         Alert.alert("Sucesso!", "Registro salvo")
 
     }
@@ -71,10 +82,10 @@ export default function Lit() {
             Alert.alert("Nada para exportar", "Adicione pelo menos um registro")
             return
         }
-        const header = 'Quarteirao,Sequencia,Lado,Numero,Seq,Complemento,Tipo,Hora\n'
+        const header = 'Quarteirao,Sequencia,Lado,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia\n'
 
         const linhas = registros.map((r) => {
-            return `${r.quarteirao},${r.sequencia},${r.lado},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora}`
+            return `${r.quarteirao},${r.sequencia},${r.lado},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia}`
         })
 
         const conteudo = header + linhas.join("\n")
@@ -107,6 +118,9 @@ export default function Lit() {
                 <LitInput label="Complemento" value={complemento} onChangeText={setComplemento} />
                 <TipoImovel value={tipo} onChange={setTipo} />
                 <LitInput label="Hora de entrada" value={hora} onChangeText={setHora} />
+                <Visita value={visita} onChange={setVisita} />
+                <Pendencia value={pendencia} onChange={setPendencia} />
+
                 <InitialButton title="Salvar Registro" onPress={salvarRegistro} />
                 <InitialButton title="Exportar CSV" onPress={exportarCSV} />
                 <BackButton title="Voltar" onPress={() => { router.back() }} />
