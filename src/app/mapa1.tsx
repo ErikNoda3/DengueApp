@@ -43,13 +43,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     img: {
-        width: "90%",
+        width: "100%",
+        resizeMode: "contain",
 
     },
     choice: {
         fontSize: 30,
         fontWeight: "bold",
-        padding: 15
+        padding: 10
     },
     buttons: {
         flexDirection: "row",

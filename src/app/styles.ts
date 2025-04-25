@@ -24,4 +24,8 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
+  subtitle: {
+    color: colors.text,
+    fontSize: 20,
+  },
 });

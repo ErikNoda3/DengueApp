@@ -8,7 +8,7 @@ export default function Mapas() {
 
 
     for (let i = 1; i <= 77; i++) {
-        items.push(<MapsButton key={i} title={i.toString()} onPress={() => { router.navigate("/opcoes") }} />)
+        items.push(<MapsButton key={i} title={i.toString()} onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i } })} />)
     }
 
     return (
@@ -43,13 +43,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     img: {
-        width: "90%",
+        width: "100%",
+        resizeMode: "contain",
 
     },
     choice: {
         fontSize: 30,
         fontWeight: "bold",
-        padding: 15
+        padding: 10
     },
     buttons: {
         flexDirection: "row",

@@ -11,8 +11,9 @@ export default function Opcoes() {
         <View style={styles.container}>
             <Text style={styles.title}>Quarteirão selecionado: {quarteirao}</Text>
             <Text style={styles.title}>Opções</Text>
-            <InitialButton title="Tratamento" onPress={() => { router.navigate("/tratamento") }} />
-            <InitialButton title="Levantamento de indices" onPress={() => router.push({ pathname: "/lit", params: { quarteirao: quarteirao } })} />
+            <InitialButton title="Tratamento (T)" onPress={() => router.push({ pathname: "/tratamento", params: { quarteirao: quarteirao } })} />
+            <InitialButton title="Levantamento de indices (LI)" onPress={() => router.push({ pathname: "/levIndices", params: { quarteirao: quarteirao } })} />
+            <InitialButton title="Li + T" onPress={() => router.push({ pathname: "/lit", params: { quarteirao: quarteirao } })} />
             <BackButton title="Sair" onPress={() => { router.back() }} />
         </View>
     )
