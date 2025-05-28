@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Alert } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
-import { useRegistro } from "./registroContext"
-import { styles } from "./styles"
+import { useRegistro } from "../context/registroContext"
+import { styles } from "../styles/styles"
 import { LitInput } from "@/components/inputs/litInput"
 import { BackButton } from "@/components/Buttons/backButton"
 import { InitialButton } from "@/components/Buttons/initialButton"
@@ -14,6 +14,7 @@ import { Pendencia } from "@/components/dropdowns/pendencia"
 
 
 type Registro = {
+    atividade: string;
     quarteirao: string;
     sequencia: string;
     lado: string;
@@ -43,7 +44,8 @@ export default function Lit() {
 
     const { registros, adicionarRegistro, limparRegistros } = useRegistro();
     const params = useLocalSearchParams()
-    const [quarteirao, setQuarteirao] = useState(params.quarteirao ? params.quarteirao.toString() : '');
+    const [atividade] = useState('LI + T')
+    const [quarteirao] = useState(params.quarteirao ? params.quarteirao.toString() : '');
     const [sequencia, setSequencia] = useState('');
     const [lado, setLado] = useState('');
     const [nome, setNome] = useState('');
@@ -75,6 +77,7 @@ export default function Lit() {
         }
 
         const novoRegistro = {
+            atividade,
             quarteirao,
             sequencia,
             lado,
@@ -120,10 +123,10 @@ export default function Lit() {
             return
         }
 
-        const header = 'Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
+        const header = 'Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
 
         const linhas = registros.map((r) => {
-            return `${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
+            return `${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
         });
 
         const conteudo = header + linhas.join("\n")
@@ -208,6 +211,7 @@ export default function Lit() {
 
 
                 <InitialButton title="Salvar Registro" onPress={salvarRegistro} />
+                <InitialButton title="Visualizar Registros" onPress={() => router.push("/registrosSalvos")} />
                 <InitialButton title="Exportar CSV" onPress={exportarCSV} />
                 <BackButton title="Voltar" onPress={() => { router.back() }} />
             </View>

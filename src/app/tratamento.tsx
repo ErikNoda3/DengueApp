@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Alert } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
-import { useRegistro } from "./registroContext"
-import { styles } from "./styles"
+import { useRegistro } from "../context/registroContext"
+import { styles } from "../styles/styles"
 import { LitInput } from "@/components/inputs/litInput"
 import { BackButton } from "@/components/Buttons/backButton"
 import { InitialButton } from "@/components/Buttons/initialButton"

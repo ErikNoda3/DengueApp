@@ -28,4 +28,28 @@ export const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 20,
   },
+  card: {
+    backgroundColor: "gray",
+  },
+
+  //registrosSalvos
+  row: {
+    flexDirection: "row",
+    marginBottom: 4,
+  },
+  cell: {
+    minWidth: 100,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    textAlign: "center",
+  },
+  header: {
+    fontWeight: "bold",
+    backgroundColor: "#e0e0e0",
+  },
+  link: {
+    color: "blue",
+    textDecorationLine: "underline",
+  },
 });

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { RegistroProvider } from "./registroContext";
+import { RegistroProvider } from "../context/registroContext";
 
 export default function MainLayout() {
 
@@ -20,6 +20,8 @@ export default function MainLayout() {
                 <Stack.Screen name="tratamento" options={{ headerShown: false }} />
                 <Stack.Screen name="levIndices" options={{ headerShown: false }} />
                 <Stack.Screen name="lit" options={{ headerShown: false }} />
+                <Stack.Screen name="registrosSalvos" options={{ title: "Registros", headerShown: true }} />
+                <Stack.Screen name="editarRegistro" options={{ headerShown: false }} />
             </Stack>
         </RegistroProvider>
     );
