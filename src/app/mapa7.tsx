@@ -16,7 +16,17 @@ export default function Mapas() {
         <ScrollView style={styles.scrollContainer}>
             <View style={styles.innerContainer}>
                 <Text style={styles.title}>Mapa 7</Text>
-                <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} />
+                {/* <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} /> */}
+                <ScrollView
+                    style={styles.zoomContainer}
+                    contentContainerStyle={styles.imgContainer}
+                    maximumZoomScale={5}
+                    minimumZoomScale={1}
+                    pinchGestureEnabled={true}
+                    horizontal
+                >
+                    <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} />
+                </ScrollView>
                 <Text style={styles.choice}>Selecione o quarteirão</Text>
                 <View style={styles.buttons}>
                     {items}
@@ -38,16 +48,27 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     title: {
+        marginVertical: 50,
         padding: 15,
         fontSize: 50,
         fontWeight: "bold",
     },
+    zoomContainer: {
+        // width: '100%',
+        height: '100%',
+    },
+    imgContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     img: {
-        width: "100%",
+        width: 900,
+        height: 700,
         resizeMode: "contain",
 
     },
     choice: {
+        marginVertical: 30,
         fontSize: 30,
         fontWeight: "bold",
         padding: 10
