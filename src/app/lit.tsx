@@ -12,34 +12,6 @@ import { TipoImovel } from "@/components/dropdowns/tipoImovel"
 import { Visita } from "@/components/dropdowns/visita"
 import { Pendencia } from "@/components/dropdowns/pendencia"
 
-
-type Registro = {
-    atividade: string;
-    quarteirao: string;
-    sequencia: string;
-    lado: string;
-    nome: string;
-    numero: string;
-    seq: string;
-    complemento: string;
-    tipo: string;
-    hora: string;
-    visita: string;
-    pendencia: string;
-
-    // tratamento
-    depositos: string;
-    imovel: string;
-    tipo1: string;
-    qtdeGrama1: string;
-    qtdeDep1: string;
-    tipo2: string;
-    qtdeGrama2: string;
-    qtdeDep2: string;
-    tipo3: string;
-    qtdeCarga: string;
-};
-
 export default function Lit() {
 
     const { registros, adicionarRegistro, limparRegistros } = useRegistro();
@@ -57,9 +29,21 @@ export default function Lit() {
     const [visita, setVisita] = useState('');
     const [pendencia, setPendencia] = useState('')
 
-    // Tratamento
+    //LI
+    const [N_A1, setNA1] = useState('')
+    const [N_A2, setNA2] = useState('')
+    const [N_B, setNB] = useState('')
+    const [N_C, setNC] = useState('')
+    const [N_D1, setND1] = useState('')
+    const [N_D2, setND2] = useState('')
+    const [N_E, setNE] = useState('')
+    const [amostra_inicial, setAmostraInicial] = useState('')
+    const [amostra_final, setAmostrafinal] = useState('')
+    const [quantidade_tubitos, setQuantidadeTubitos] = useState('')
     const [depositos, setDepositos] = useState('');
     const [imovel, setImovel] = useState('');
+
+    // Tratamento
     const [tipo1, setTipo1] = useState('');
     const [qtdeGrama1, setQtdeGrama1] = useState('');
     const [qtdeDep1, setQtdeDep1] = useState('');
@@ -89,8 +73,20 @@ export default function Lit() {
             hora,
             visita,
             pendencia,
+            //LI
+            N_A1,
+            N_A2,
+            N_B,
+            N_C,
+            N_D1,
+            N_D2,
+            N_E,
+            amostra_inicial,
+            amostra_final,
+            quantidade_tubitos,
             depositos,
             imovel,
+            //T
             tipo1,
             qtdeGrama1,
             qtdeDep1,
@@ -116,6 +112,7 @@ export default function Lit() {
         setVisita('');
         setPendencia('');
     }
+
     // =====================================================================================================================
     async function exportarCSV() {
         if (registros.length === 0) {
@@ -123,10 +120,10 @@ export default function Lit() {
             return
         }
 
-        const header = 'Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
+        const header = 'Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
 
         const linhas = registros.map((r) => {
-            return `${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
+            return `${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
         });
 
         const conteudo = header + linhas.join("\n")
@@ -189,10 +186,24 @@ export default function Lit() {
                 <Visita value={visita} onChange={setVisita} />
                 <Pendencia value={pendencia} onChange={setPendencia} />
 
-                <Text style={styles.title}>Tratamento</Text>
+                {/* ========================= LI ============================================ */}
+                <Text style={styles.title}>Levantamento de Índice</Text>
+                <LitInput label="Número de depósito A1 (caixa d'água)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_A1} onChangeText={setNA1} />
+                <LitInput label="Número de depósito A2 (Outros depósitos de armazenamento de água)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_A2} onChangeText={setNA2} />
+                <LitInput label="Número de depósito B (Pequenos depósitos móveis)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_B} onChangeText={setNB} />
+                <LitInput label="Número de depósito C (Depósitos fixos)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_C} onChangeText={setNC} />
+                <LitInput label="Número de depósito D1 (Pneus e outros materiais rodantes)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_D1} onChangeText={setND1} />
+                <LitInput label="Número de depósito D2 (Lixo (recipientes plásticos, latas) sucatas, entulhos)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_D2} onChangeText={setND2} />
+                <LitInput label="Número de depósito E (Depósitos naturais)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_E} onChangeText={setNE} />
+                <LitInput label="Número da amostra inicial" keyboardType="numeric" placeholder="Digite o número da amostra inicial" value={amostra_inicial} onChangeText={setAmostraInicial} />
+                <LitInput label="Número da amostra final" placeholder="Digite o número da amostra final" value={amostra_final} onChangeText={setAmostrafinal} />
+                <LitInput label="Quantidade de Tubitos" placeholder="Digite a quantidade de tubitos utilizados" value={quantidade_tubitos} onChangeText={setQuantidadeTubitos} />
+
                 <LitInput label="Depósitos elmininados" placeholder="Digite a quantidade de depósitos eliminados" value={depositos} onChangeText={setDepositos} />
                 <LitInput label="Imóvel" placeholder="Digite o imóvel" value={imovel} onChangeText={setImovel} />
 
+                {/* ========================== T ==============================================*/}
+                <Text style={styles.title}>Tratamento</Text>
                 <Text style={styles.title}>Focal</Text>
                 <Text style={styles.subtitle}>Larvicida (1)</Text>
                 <LitInput label="Tipo" placeholder="Digite o tipo" value={tipo1} onChangeText={setTipo1} />

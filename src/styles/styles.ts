@@ -32,17 +32,19 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
 
-  //registrosSalvos
+  //registrosSalvos--------------------------------------------------------
   row: {
     flexDirection: "row",
     marginBottom: 4,
   },
   cell: {
-    minWidth: 100,
+    minWidth: 200,
     padding: 5,
     borderWidth: 1,
     borderColor: "#ccc",
     textAlign: "center",
+    justifyContent: "center",
+    gap: 50,
   },
   header: {
     fontWeight: "bold",

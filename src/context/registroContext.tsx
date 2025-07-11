@@ -13,6 +13,16 @@ type Registro = {
     hora: string;
     visita: string;
     pendencia: string;
+    N_A1: string;
+    N_A2: string;
+    N_B: string;
+    N_C: string;
+    N_D1: string;
+    N_D2: string;
+    N_E: string;
+    amostra_inicial: string;
+    amostra_final: string;
+    quantidade_tubitos: string;
     depositos: string;
     imovel: string;
     tipo1: string;

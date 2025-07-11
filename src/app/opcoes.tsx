@@ -8,7 +8,7 @@ export default function Opcoes() {
 
     const { quarteirao } = useLocalSearchParams()
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
                 <Text style={styles.title}>Quarteirão selecionado: {quarteirao}</Text>
                 <Text style={styles.title}>Opções</Text>
@@ -20,3 +20,4 @@ export default function Opcoes() {
         </ScrollView>
     )
 }
+
