@@ -10,6 +10,15 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
   },
+  containerData: {
+    display: "flex",
+    width: "50%",
+  },
+  data: {
+    paddingVertical: 5,
+    textAlign: "left",
+    fontSize: 17,
+  },
   //
   container: {
     flex: 1,
@@ -30,6 +39,9 @@ export const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "gray",
+  },
+  negrito: {
+    fontWeight: "bold",
   },
 
   //registrosSalvos--------------------------------------------------------

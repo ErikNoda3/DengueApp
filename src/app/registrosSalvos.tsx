@@ -23,9 +23,9 @@ export default function RegistrosSalvos() {
     }
 
     const cabecalhos = [
-        'atividade', 'quarteirao', 'sequencia', 'lado', 'nome', 'numero', 'seq', 'complemento',
-        'tipo', 'hora', 'visita', 'pendencia', 'N_A1', , 'N_A2', 'N_B', 'N_C', 'N_D1', 'N_D2', 'N_E',
-        'Amostra_inicial', 'Amostra_final', 'Quantidade tubitos', 'Depositos Eliminados', 'Imóvel',
+        'data', 'atividade', 'quarteirao', 'sequencia', 'lado', 'nome', 'numero', 'seq', 'complemento',
+        'tipo', 'hora', 'visita', 'pendencia', 'N_A1', 'N_A2', 'N_B', 'N_C', 'N_D1', 'N_D2', 'N_E',
+        'amostra_inicial', 'amostra_final', 'quantidade_tubitos', 'depositos', 'imovel',
         'tipo1', 'qtdeGrama1', 'qtdeDep1', 'tipo2', 'qtdeGrama2', 'qtdeDep2',
         'tipo3', 'qtdeCarga'
     ];

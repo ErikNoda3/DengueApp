@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Alert } from "react-native"
+import { View, Text, ScrollView, Alert, Button } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
 import { useRegistro } from "../context/registroContext"
 import { styles } from "../styles/styles"
@@ -16,6 +16,8 @@ export default function Lit() {
 
     const { registros, adicionarRegistro, limparRegistros } = useRegistro();
     const params = useLocalSearchParams()
+
+    const [data] = useState(new Date())
     const [atividade] = useState('LI + T')
     const [quarteirao] = useState(params.quarteirao ? params.quarteirao.toString() : '');
     const [sequencia, setSequencia] = useState('');
@@ -53,7 +55,7 @@ export default function Lit() {
     const [tipo3, setTipo3] = useState('');
     const [qtdeCarga, setQtdeCarga] = useState('');
 
-    // =====================================================================================================================
+    // ====================Salva os registros==================================================================
     function salvarRegistro() {
         if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
             Alert.alert("Campos sem informação", "Preencha todos os campos");
@@ -61,6 +63,7 @@ export default function Lit() {
         }
 
         const novoRegistro = {
+            data: data.toISOString().split("T")[0],
             atividade,
             quarteirao,
             sequencia,
@@ -113,17 +116,17 @@ export default function Lit() {
         setPendencia('');
     }
 
-    // =====================================================================================================================
+    // ==========================Exporta CSV============================================================
     async function exportarCSV() {
         if (registros.length === 0) {
             Alert.alert("Nada para exportar", "Adicione pelo menos um registro")
             return
         }
 
-        const header = 'Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
+        const header = 'Data,Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
 
         const linhas = registros.map((r) => {
-            return `${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
+            return `${data.toISOString().split("T")[0]},${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
         });
 
         const conteudo = header + linhas.join("\n")
@@ -175,11 +178,17 @@ export default function Lit() {
 
                 <Text style={styles.title}>Li + T</Text>
                 <Text style={styles.quarteiraoText}>Quarteirão selecionado: {quarteirao}</Text>
-                <LitInput label="Sequência" placeholder="Digite a sequência" value={sequencia} onChangeText={setSequencia} />
-                <LitInput label="Lado" placeholder="Digite o lado" value={lado} onChangeText={setLado} />
+
+                <View style={styles.containerData}>
+                    <Text style={[styles.data, styles.negrito]}>Data da visita: </Text>
+                    <Text style={styles.data}>{data.toLocaleDateString("pt-BR")} </Text>
+                </View>
+
+                <LitInput label="Sequência" keyboardType="numeric" placeholder="Digite a sequência" value={sequencia} onChangeText={setSequencia} />
+                <LitInput label="Lado" keyboardType="numeric" placeholder="Digite o lado" value={lado} onChangeText={setLado} />
                 <LitInput label="Nome do logradouro" placeholder="Digite o nome do logradouro" value={nome} onChangeText={setNome} />
-                <LitInput label="Número" placeholder="Digite o número" value={numero} onChangeText={setNumero} />
-                <LitInput label="Seq." placeholder="Digite a sequência" value={seq} onChangeText={setSeq} />
+                <LitInput label="Número" keyboardType="numeric" placeholder="Digite o número" value={numero} onChangeText={setNumero} />
+                <LitInput label="Seq." keyboardType="numeric" placeholder="Digite a sequência" value={seq} onChangeText={setSeq} />
                 <LitInput label="Complemento" placeholder="Digite o complemento" value={complemento} onChangeText={setComplemento} />
                 <TipoImovel value={tipo} onChange={setTipo} />
                 <LitInput label="Hora de entrada" placeholder="Digite a hora de entrada" value={hora} onChangeText={setHora} />
@@ -196,10 +205,10 @@ export default function Lit() {
                 <LitInput label="Número de depósito D2 (Lixo (recipientes plásticos, latas) sucatas, entulhos)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_D2} onChangeText={setND2} />
                 <LitInput label="Número de depósito E (Depósitos naturais)" keyboardType="numeric" placeholder="Digite o número de depósitos inspecionados" value={N_E} onChangeText={setNE} />
                 <LitInput label="Número da amostra inicial" keyboardType="numeric" placeholder="Digite o número da amostra inicial" value={amostra_inicial} onChangeText={setAmostraInicial} />
-                <LitInput label="Número da amostra final" placeholder="Digite o número da amostra final" value={amostra_final} onChangeText={setAmostrafinal} />
-                <LitInput label="Quantidade de Tubitos" placeholder="Digite a quantidade de tubitos utilizados" value={quantidade_tubitos} onChangeText={setQuantidadeTubitos} />
+                <LitInput label="Número da amostra final" keyboardType="numeric" placeholder="Digite o número da amostra final" value={amostra_final} onChangeText={setAmostrafinal} />
+                <LitInput label="Quantidade de Tubitos" keyboardType="numeric" placeholder="Digite a quantidade de tubitos utilizados" value={quantidade_tubitos} onChangeText={setQuantidadeTubitos} />
 
-                <LitInput label="Depósitos elmininados" placeholder="Digite a quantidade de depósitos eliminados" value={depositos} onChangeText={setDepositos} />
+                <LitInput label="Depósitos elmininados" keyboardType="numeric" placeholder="Digite a quantidade eliminada" value={depositos} onChangeText={setDepositos} />
                 <LitInput label="Imóvel" placeholder="Digite o imóvel" value={imovel} onChangeText={setImovel} />
 
                 {/* ========================== T ==============================================*/}
@@ -207,18 +216,18 @@ export default function Lit() {
                 <Text style={styles.title}>Focal</Text>
                 <Text style={styles.subtitle}>Larvicida (1)</Text>
                 <LitInput label="Tipo" placeholder="Digite o tipo" value={tipo1} onChangeText={setTipo1} />
-                <LitInput label="Qtde (Grama)" placeholder="Digite a quantidade" value={qtdeGrama1} onChangeText={setQtdeGrama1} />
-                <LitInput label="Qtde dep. trat" placeholder="Digite a quantidade dep. trat" value={qtdeDep1} onChangeText={setQtdeDep1} />
+                <LitInput label="Qtde (Grama)" keyboardType="numeric" placeholder="Digite a quantidade" value={qtdeGrama1} onChangeText={setQtdeGrama1} />
+                <LitInput label="Qtde dep. trat" keyboardType="numeric" placeholder="Digite a quantidade dep. trat" value={qtdeDep1} onChangeText={setQtdeDep1} />
 
                 <Text style={styles.subtitle}>Larvicida (2)</Text>
                 <LitInput label="Tipo" placeholder="Digite o tipo" value={tipo2} onChangeText={setTipo2} />
-                <LitInput label="Qtde (Grama)" placeholder="Digite a quantidade" value={qtdeGrama2} onChangeText={setQtdeGrama2} />
-                <LitInput label="Qtde dep. trat" placeholder="Digite a quantidade dep. trat" value={qtdeDep2} onChangeText={setQtdeDep2} />
+                <LitInput label="Qtde (Grama)" keyboardType="numeric" placeholder="Digite a quantidade" value={qtdeGrama2} onChangeText={setQtdeGrama2} />
+                <LitInput label="Qtde dep. trat" keyboardType="numeric" placeholder="Digite a quantidade dep. trat" value={qtdeDep2} onChangeText={setQtdeDep2} />
 
                 <Text style={styles.title}>Perifocal</Text>
                 <Text style={styles.subtitle}>Adulticida</Text>
                 <LitInput label="Tipo" placeholder="Digite o tipo" value={tipo3} onChangeText={setTipo3} />
-                <LitInput label="Qtde carga" placeholder="Digite a quantidade" value={qtdeCarga} onChangeText={setQtdeCarga} />
+                <LitInput label="Qtde carga" keyboardType="numeric" placeholder="Digite a quantidade" value={qtdeCarga} onChangeText={setQtdeCarga} />
 
 
                 <InitialButton title="Salvar Registro" onPress={salvarRegistro} />
