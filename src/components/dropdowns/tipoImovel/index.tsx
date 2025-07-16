@@ -19,23 +19,26 @@ export function TipoImovel({ value, onChange }: OpcoesProps) {
     ];
 
     return (
-        <Dropdown
-            style={styles.dropdown}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            inputSearchStyle={styles.inputSearchStyle}
-            data={data}
-            // search
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder="Tipo do imóvel"
-            // searchPlaceholder="Digite..."
-            value={value}
-            onChange={item => {
-                onChange(item.value);
-            }}
-        />
+        <View style={styles.container}>
+            <Text style={styles.title}>Tipo do imóvel</Text>
+            <Dropdown
+                style={styles.dropdown}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                data={data}
+                // search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder="Selecione"
+                // searchPlaceholder="Digite..."
+                value={value}
+                onChange={item => {
+                    onChange(item.value);
+                }}
+            />
+        </View>
     );
 };
 

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { View, Text, ScrollView, Alert, Button } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
 import { useRegistro } from "../context/registroContext"
+import DateTimePicker from "@react-native-community/datetimepicker"
 import { styles } from "../styles/styles"
 import { LitInput } from "@/components/inputs/litInput"
 import { BackButton } from "@/components/Buttons/backButton"
@@ -27,7 +28,16 @@ export default function Lit() {
     const [seq, setSeq] = useState('');
     const [complemento, setComplemento] = useState('')
     const [tipo, setTipo] = useState('');
-    const [hora, setHora] = useState('');
+
+    const [hora, setHora] = useState(new Date());
+    const [mostrar, setMostrar] = useState(false)
+    const onChange = (_event: any, selectedDate?: Date) => {
+        if (selectedDate) {
+            setHora(selectedDate);
+            setMostrar(false)
+        }
+    };
+
     const [visita, setVisita] = useState('');
     const [pendencia, setPendencia] = useState('')
 
@@ -57,10 +67,10 @@ export default function Lit() {
 
     // ====================Salva os registros==================================================================
     function salvarRegistro() {
-        if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
-            Alert.alert("Campos sem informação", "Preencha todos os campos");
-            return;
-        }
+        // if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
+        //     Alert.alert("Campos sem informação", "Preencha todos os campos");
+        //     return;
+        // }
 
         const novoRegistro = {
             data: data.toISOString().split("T")[0],
@@ -73,7 +83,7 @@ export default function Lit() {
             seq,
             complemento,
             tipo,
-            hora,
+            hora: hora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
             visita,
             pendencia,
             //LI
@@ -110,8 +120,8 @@ export default function Lit() {
         setNumero('');
         setSeq('');
         setComplemento('');
+        setHora(new Date());
         setTipo('');
-        setHora('');
         setVisita('');
         setPendencia('');
     }
@@ -154,8 +164,8 @@ export default function Lit() {
         setSeq('');
         setComplemento('');
         setTipo('');
-        setHora('');
         setVisita('');
+        setHora(new Date());
         setPendencia('');
         setDepositos('');
         setImovel('');
@@ -191,7 +201,26 @@ export default function Lit() {
                 <LitInput label="Seq." keyboardType="numeric" placeholder="Digite a sequência" value={seq} onChangeText={setSeq} />
                 <LitInput label="Complemento" placeholder="Digite o complemento" value={complemento} onChangeText={setComplemento} />
                 <TipoImovel value={tipo} onChange={setTipo} />
-                <LitInput label="Hora de entrada" placeholder="Digite a hora de entrada" value={hora} onChangeText={setHora} />
+
+                <View style={styles.containerData}>
+
+                    <Text style={{ fontSize: 16, marginBottom: 10 }}>
+                        <Text style={[styles.data, styles.negrito]}>Hora da visita: </Text>
+                        <Text style={styles.data}>{hora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })} </Text>
+                    </Text>
+                    <Button title="Selecionar Hora" onPress={() => setMostrar(true)} />
+                </View>
+
+                {mostrar && (
+                    <DateTimePicker
+                        value={hora}
+                        mode="time"
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
+
                 <Visita value={visita} onChange={setVisita} />
                 <Pendencia value={pendencia} onChange={setPendencia} />
 

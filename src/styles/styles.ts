@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   data: {
     paddingVertical: 5,
     textAlign: "left",
-    fontSize: 17,
+    fontSize: 18,
   },
   //
   container: {

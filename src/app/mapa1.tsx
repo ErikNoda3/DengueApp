@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     img: {
         width: 900,
         height: 700,
-        resizeMode: "contain",
+        resizeMode: 'cover',
     },
     choice: {
         marginVertical: 30,
