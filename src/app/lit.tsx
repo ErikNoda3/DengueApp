@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, Alert, Button } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
 import { useRegistro } from "../context/registroContext"
@@ -73,7 +73,7 @@ export default function Lit() {
         // }
 
         const novoRegistro = {
-            data: data.toISOString().split("T")[0],
+            data: data.toLocaleDateString("pt-BR").toString().split("T")[0],
             atividade,
             quarteirao,
             sequencia,
@@ -114,6 +114,7 @@ export default function Lit() {
         Alert.alert("Sucesso!", "Registro salvo");
 
         // Resetando os campos após salvar
+
         setSequencia('');
         setLado('');
         setNome('');
@@ -124,6 +125,28 @@ export default function Lit() {
         setTipo('');
         setVisita('');
         setPendencia('');
+        setDepositos('');
+        setImovel('');
+        setTipo1('');
+        setQtdeGrama1('');
+        setQtdeDep1('');
+        setTipo2('');
+        setQtdeGrama2('');
+        setQtdeDep2('');
+        setTipo3('');
+        setQtdeCarga('');
+        setNA1('');
+        setNA2('');
+        setNB('');
+        setNC('');
+        setND1('');
+        setND2('');
+        setNE('');
+        setAmostraInicial('');
+        setAmostrafinal('');
+        setQuantidadeTubitos('');
+
+
     }
 
     // ==========================Exporta CSV============================================================
@@ -133,10 +156,10 @@ export default function Lit() {
             return
         }
 
-        const header = 'Data,Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticidan Qtde Carga\n';
+        const header = 'Data,Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E, Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticida Qtde Carga\n';
 
         const linhas = registros.map((r) => {
-            return `${data.toISOString().split("T")[0]},${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
+            return `${r.data},${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
         });
 
         const conteudo = header + linhas.join("\n")
@@ -157,15 +180,16 @@ export default function Lit() {
         limparRegistros();
 
         // Limpar os campos após exportação
+
         setSequencia('');
         setLado('');
         setNome('');
         setNumero('');
         setSeq('');
         setComplemento('');
+        setHora(new Date());
         setTipo('');
         setVisita('');
-        setHora(new Date());
         setPendencia('');
         setDepositos('');
         setImovel('');
@@ -177,6 +201,18 @@ export default function Lit() {
         setQtdeDep2('');
         setTipo3('');
         setQtdeCarga('');
+        setNA1('');
+        setNA2('');
+        setNB('');
+        setNC('');
+        setND1('');
+        setND2('');
+        setNE('');
+        setAmostraInicial('');
+        setAmostrafinal('');
+        setQuantidadeTubitos('');
+
+
     }
 
     // =====================================================================================================================

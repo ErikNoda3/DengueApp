@@ -7,6 +7,8 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
   },
   quarteiraoText: {
+    width: "50%",
+    textAlign: "left",
     fontWeight: "bold",
     fontSize: 20,
   },
@@ -47,7 +49,6 @@ export const styles = StyleSheet.create({
   //registrosSalvos--------------------------------------------------------
   row: {
     flexDirection: "row",
-    marginBottom: 4,
   },
   cell: {
     minWidth: 200,
