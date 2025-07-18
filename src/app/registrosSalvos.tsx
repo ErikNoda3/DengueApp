@@ -33,6 +33,7 @@ export default function RegistrosSalvos() {
     return (
         <ScrollView horizontal>
             <ScrollView contentContainerStyle={styles.container}>
+                <Text style={[styles.qtdeRegistros, styles.negrito]}>Quantidade de registros: {registros.length}</Text>
                 <View style={styles.row}>
                     {cabecalhos.map((h, i) => (
                         <Text key={i} style={[styles.cell, styles.header]}>{h}</Text>

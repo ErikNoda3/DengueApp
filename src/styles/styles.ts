@@ -47,6 +47,12 @@ export const styles = StyleSheet.create({
   },
 
   //registrosSalvos--------------------------------------------------------
+  qtdeRegistros: {
+    width: "100%",
+    fontSize: 25,
+    padding: 10,
+    marginTop: -100,
+  },
   row: {
     flexDirection: "row",
   },
