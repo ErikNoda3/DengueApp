@@ -1,29 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Image, Dimensions } from 'react-native'
 import { router } from 'expo-router'
 import { MapsButton } from '@/components/Buttons/mapsButton'
 import { BackButton } from '@/components/Buttons/backButton'
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
-import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated'
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'
 
-export default function Mapas() {
-    const scale = useSharedValue(1)
-    const savedScale = useSharedValue(1)
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height
 
-    const pinchGesture = Gesture.Pinch()
-        .onStart(() => {
-            savedScale.value = scale.value
-        })
-        .onUpdate((event) => {
-            const newScale = savedScale.value * event.scale;
-            scale.value = Math.min(Math.max(newScale, 1), 3); // entre 1x e 3x de zoom
-        })
-
-
-    const animatedStyle = useAnimatedStyle(() => ({
-        transform: [{ scale: scale.value }]
-    }))
-
+export default function Mapa1() {
     const items = []
     for (let i = 1; i <= 37; i++) {
         items.push(
@@ -36,26 +21,31 @@ export default function Mapas() {
     }
 
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            <ScrollView style={styles.scrollContainer}>
-                <View style={styles.innerContainer}>
-                    <Text style={styles.title}>Mapa 1</Text>
+        <ScrollView style={styles.scrollContainer}>
+            <View style={styles.innerContainer}>
 
-                    <GestureDetector gesture={pinchGesture}>
-                        <Animated.Image
-                            style={[styles.img, animatedStyle]}
-                            source={require('../../assets/images/mapa1.jpg')}
-                        />
-                    </GestureDetector>
+                <Text style={styles.title}>Mapa 1</Text>
 
-                    <Text style={styles.choice}>Selecione o quarteirão</Text>
-                    <View style={styles.buttons}>
-                        {items}
-                    </View>
-                    <BackButton title="Voltar" onPress={() => router.back()} />
+                <View style={styles.zoomContainer}>
+
+                    <ReactNativeZoomableView
+                        maxZoom={4}
+                        minZoom={1}
+                        zoomStep={0.1}
+                        bindToBorders={true}
+                        panBoundaryPadding={50}
+                    >
+                        <Image style={styles.img} source={require('../../assets/images/mapa1.jpg')} />
+                    </ReactNativeZoomableView>
                 </View>
-            </ScrollView>
-        </GestureHandlerRootView>
+
+                <Text style={styles.choice}>Selecione o quarteirão</Text>
+                <View style={styles.buttons}>
+                    {items}
+                </View>
+                <BackButton title="Voltar" onPress={() => router.back()} />
+            </View>
+        </ScrollView>
     )
 }
 
@@ -75,10 +65,19 @@ const styles = StyleSheet.create({
         fontSize: 50,
         fontWeight: "bold",
     },
+    zoomContainer: {
+        width: screenWidth * 0.75,
+        height: screenHeight * 0.9,
+        overflow: "hidden",
+        borderRadius: 12,
+        borderColor: 'gray',
+        borderWidth: 2
+    },
     img: {
-        width: 900,
-        height: 700,
-        resizeMode: 'cover',
+        width: '100%',
+        height: '100%',
+        aspectRatio: 900 / 700,
+        resizeMode: 'contain'
     },
     choice: {
         marginVertical: 30,

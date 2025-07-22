@@ -1,9 +1,13 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native"
+import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from "react-native"
 import { router } from "expo-router"
 import { MapsButton } from "@/components/Buttons/mapsButton"
 import { BackButton } from "@/components/Buttons/backButton"
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'
 
-export default function Mapas() {
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height
+
+export default function Mapa7() {
     const items = []
 
 
@@ -16,17 +20,18 @@ export default function Mapas() {
         <ScrollView style={styles.scrollContainer}>
             <View style={styles.innerContainer}>
                 <Text style={styles.title}>Mapa 7</Text>
-                {/* <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} /> */}
-                <ScrollView
-                    style={styles.zoomContainer}
-                    contentContainerStyle={styles.imgContainer}
-                    maximumZoomScale={5}
-                    minimumZoomScale={1}
-                    pinchGestureEnabled={true}
-                    horizontal
-                >
-                    <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} />
-                </ScrollView>
+                <View style={styles.zoomContainer}>
+
+                    <ReactNativeZoomableView
+                        maxZoom={4}
+                        minZoom={1}
+                        zoomStep={0.1}
+                        bindToBorders={true}
+                        panBoundaryPadding={50}
+                    >
+                        <Image style={styles.img} source={require('../../assets/images/mapa7.jpg')} />
+                    </ReactNativeZoomableView>
+                </View>
                 <Text style={styles.choice}>Selecione o quarteirão</Text>
                 <View style={styles.buttons}>
                     {items}
@@ -54,18 +59,18 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     zoomContainer: {
-        // width: '100%',
-        height: '100%',
-    },
-    imgContainer: {
-        alignItems: 'center',
-        justifyContent: 'center'
+        width: screenWidth * 0.75,
+        height: screenHeight * 0.9,
+        overflow: "hidden",
+        borderRadius: 12,
+        borderColor: 'gray',
+        borderWidth: 2
     },
     img: {
-        width: 900,
-        height: 700,
-        resizeMode: "contain",
-
+        width: '100%',
+        height: '100%',
+        aspectRatio: 900 / 700,
+        resizeMode: 'contain'
     },
     choice: {
         marginVertical: 30,

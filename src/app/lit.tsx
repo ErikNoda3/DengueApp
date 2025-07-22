@@ -274,7 +274,7 @@ export default function Lit() {
                 <LitInput label="Quantidade de Tubitos" keyboardType="numeric" placeholder="Digite a quantidade de tubitos utilizados" value={quantidade_tubitos} onChangeText={setQuantidadeTubitos} />
 
                 <LitInput label="Depósitos elmininados" keyboardType="numeric" placeholder="Digite a quantidade eliminada" value={depositos} onChangeText={setDepositos} />
-                <LitInput label="Imóvel" placeholder="Digite o imóvel" value={imovel} onChangeText={setImovel} />
+                <LitInput label="Imóveis tratados" placeholder="Digite o imóvel" value={imovel} onChangeText={setImovel} />
 
                 {/* ========================== T ==============================================*/}
                 <Text style={styles.title}>Tratamento</Text>
