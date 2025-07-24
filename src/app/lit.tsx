@@ -14,13 +14,15 @@ import { Visita } from "@/components/dropdowns/visita"
 import { Pendencia } from "@/components/dropdowns/pendencia"
 
 export default function Lit() {
-
-    const { registros, adicionarRegistro, limparRegistros } = useRegistro();
     const params = useLocalSearchParams()
 
-    const [data] = useState(new Date())
-    const [atividade] = useState('LI + T')
-    const [quarteirao] = useState(params.quarteirao ? params.quarteirao.toString() : '');
+    const { registros, adicionarRegistro, limparRegistros } = useRegistro();
+
+    const [CPF, setCPF] = useState(params.CPF.toString());
+    const [matricula, setMatricua] = useState(params.matricula.toString());
+    const [data, setData] = useState(new Date())
+    const [atividade, setAtividade] = useState('LI + T')
+    const [quarteirao, setQuarteirao] = useState(params.quarteirao.toString());
     const [sequencia, setSequencia] = useState('');
     const [lado, setLado] = useState('');
     const [nome, setNome] = useState('');
@@ -73,6 +75,8 @@ export default function Lit() {
         // }
 
         const novoRegistro = {
+            CPF: CPF,
+            matricula: matricula,
             data: data.toLocaleDateString("pt-BR").toString().split("T")[0],
             atividade,
             quarteirao,
@@ -156,10 +160,10 @@ export default function Lit() {
             return
         }
 
-        const header = 'Data,Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E, Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticida Qtde Carga\n';
+        const header = 'CPF,Matricula,Data,Atividade,Quarteirao,Sequencia,Lado,Nome do logradouro,Numero,Seq,Complemento,Tipo,Hora,Visita,Pendencia,N_A1, N_A2, N_B, N_C, N_D1, N_D2, N_E, Amostra inicial, Amostra final, Quantidade de tubitos, Depositos Eliminados,Imovel,Larvicida1 Tipo,Larvicida1 Qtde(Grama),Larvicida1 Qtde dep._trat,Larvicida2 Tipo,Larvicida2 Qtde(Grama), Larvicida2 Qtde dep._trat,Adulticida Tipo, Adulticida Qtde Carga\n';
 
         const linhas = registros.map((r) => {
-            return `${r.data},${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
+            return `${r.CPF},${r.matricula},${r.data},${atividade},${r.quarteirao},${r.sequencia},${r.lado},${r.nome},${r.numero},${r.seq},${r.complemento},${r.tipo},${r.hora},${r.visita},${r.pendencia},${r.N_A1},${r.N_A2},${r.N_B},${r.N_C},${r.N_D1},${r.N_D2},${r.N_E},${r.amostra_inicial},${r.amostra_final},${r.quantidade_tubitos},${r.depositos},${r.imovel},${r.tipo1},${r.qtdeGrama1},${r.qtdeDep1},${r.tipo2},${r.qtdeGrama2},${r.qtdeDep2},${r.tipo3},${r.qtdeCarga}`
         });
 
         const conteudo = header + linhas.join("\n")
@@ -223,6 +227,8 @@ export default function Lit() {
             <View style={styles.container}>
 
                 <Text style={styles.title}>Li + T</Text>
+                <Text style={styles.quarteiraoText}>CPF: {CPF}</Text>
+                <Text style={styles.quarteiraoText}>Matricula: {matricula}</Text>
                 <Text style={styles.quarteiraoText}>Quarteirão selecionado: {quarteirao}</Text>
 
                 <View style={styles.containerData}>

@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Registro = {
+    CPF: string;
+    matricula: string;
     data: string;
     atividade: string;
     quarteirao: string;

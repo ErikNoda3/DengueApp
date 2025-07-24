@@ -2,6 +2,7 @@ import { View, Text, Alert, ScrollView, Pressable } from "react-native";
 import { useRegistro } from "../context/registroContext";
 import { styles } from "../styles/styles"
 import { router } from "expo-router";
+import { BackButton } from "@/components/Buttons/backButton";
 
 export default function RegistrosSalvos() {
     const { registros, limparRegistros, adicionarRegistro } = useRegistro()
@@ -23,7 +24,7 @@ export default function RegistrosSalvos() {
     }
 
     const cabecalhos = [
-        'data', 'atividade', 'quarteirao', 'sequencia', 'lado', 'nome', 'numero', 'seq', 'complemento',
+        'CPF', 'matricula', 'data', 'atividade', 'quarteirao', 'sequencia', 'lado', 'nome', 'numero', 'seq', 'complemento',
         'tipo', 'hora', 'visita', 'pendencia', 'N_A1', 'N_A2', 'N_B', 'N_C', 'N_D1', 'N_D2', 'N_E',
         'amostra_inicial', 'amostra_final', 'quantidade_tubitos', 'depositos', 'imovel',
         'tipo1', 'qtdeGrama1', 'qtdeDep1', 'tipo2', 'qtdeGrama2', 'qtdeDep2',
@@ -55,7 +56,6 @@ export default function RegistrosSalvos() {
                                 <Text style={[styles.link, { color: "red", marginLeft: 10 }]}>Excluir</Text>
                             </Pressable>
                         </View>
-
                     </View>
                 ))}
             </ScrollView>
