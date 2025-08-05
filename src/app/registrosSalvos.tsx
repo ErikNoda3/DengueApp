@@ -2,7 +2,6 @@ import { View, Text, Alert, ScrollView, Pressable } from "react-native";
 import { useRegistro } from "../context/registroContext";
 import { styles } from "../styles/styles"
 import { router } from "expo-router";
-import { BackButton } from "@/components/Buttons/backButton";
 
 export default function RegistrosSalvos() {
     const { registros, limparRegistros, adicionarRegistro } = useRegistro()

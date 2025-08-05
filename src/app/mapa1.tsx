@@ -20,7 +20,7 @@ export default function Mapa1() {
             <MapsButton
                 key={i}
                 title={i.toString()}
-                onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i, CPF: CPF, matricula: matricula } })}
+                onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i, CPF: CPF, matricula: matricula, mapa: '1' } })}
             />
         )
     }

@@ -12,14 +12,21 @@ import * as Sharing from 'expo-sharing'
 import { TipoImovel } from "@/components/dropdowns/tipoImovel"
 import { Visita } from "@/components/dropdowns/visita"
 import { Pendencia } from "@/components/dropdowns/pendencia"
+import { Mapa1_ruas } from "@/components/dropdowns/Mapa1_ruas";
+import { Mapa2_ruas } from "@/components/dropdowns/Mapa2_ruas";
+import { Mapa3_ruas } from "@/components/dropdowns/Mapa3_ruas";
+import { Mapa4_ruas } from "@/components/dropdowns/Mapa4_ruas";
+import { Mapa5_ruas } from "@/components/dropdowns/Mapa5_ruas";
+import { Mapa6_ruas } from "@/components/dropdowns/Mapa6_ruas";
+import { Mapa7_ruas } from "@/components/dropdowns/Mapa7_ruas";
 
 export default function Lit() {
     const params = useLocalSearchParams()
 
     const { registros, adicionarRegistro, limparRegistros } = useRegistro();
-
     const [CPF, setCPF] = useState(params.CPF.toString());
     const [matricula, setMatricua] = useState(params.matricula.toString());
+    const [mapa, setMapa] = useState(params.mapa.toString());
     const [data, setData] = useState(new Date())
     const [atividade, setAtividade] = useState('LI + T')
     const [quarteirao, setQuarteirao] = useState(params.quarteirao.toString());
@@ -238,7 +245,28 @@ export default function Lit() {
 
                 <LitInput label="Sequência" keyboardType="numeric" placeholder="Digite a sequência" value={sequencia} onChangeText={setSequencia} />
                 <LitInput label="Lado" keyboardType="numeric" placeholder="Digite o lado" value={lado} onChangeText={setLado} />
-                <LitInput label="Nome do logradouro" placeholder="Digite o nome do logradouro" value={nome} onChangeText={setNome} />
+
+                {mapa === '1' &&
+                    <Mapa1_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '2' &&
+                    <Mapa2_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '3' &&
+                    <Mapa3_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '4' &&
+                    <Mapa4_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '5' &&
+                    <Mapa5_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '6' &&
+                    <Mapa6_ruas value={nome} onChange={setNome} />
+                }
+                {mapa === '7' &&
+                    <Mapa7_ruas value={nome} onChange={setNome} />
+                }
                 <LitInput label="Número" keyboardType="numeric" placeholder="Digite o número" value={numero} onChangeText={setNumero} />
                 <LitInput label="Seq." keyboardType="numeric" placeholder="Digite a sequência" value={seq} onChangeText={setSeq} />
                 <LitInput label="Complemento" placeholder="Digite o complemento" value={complemento} onChangeText={setComplemento} />

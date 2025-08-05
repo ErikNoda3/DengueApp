@@ -1,19 +1,28 @@
 import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from "react-native"
-import { router } from "expo-router"
+import { router, useLocalSearchParams } from "expo-router"
 import { MapsButton } from "@/components/Buttons/mapsButton"
 import { BackButton } from "@/components/Buttons/backButton"
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'
+import { useState } from "react"
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height
 
 export default function Mapa2() {
+    const params = useLocalSearchParams()
+    const [CPF, setCPF] = useState(params.CPF.toString());
+    const [matricula, setMatricula] = useState(params.matricula.toString());
+
     const items = []
-
     for (let i = 1; i <= 77; i++) {
-        items.push(<MapsButton key={i} title={i.toString()} onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i } })} />)
+        items.push(
+            <MapsButton
+                key={i}
+                title={i.toString()}
+                onPress={() => router.push({ pathname: "/opcoes", params: { quarteirao: i, CPF: CPF, matricula: matricula, mapa: '2' } })}
+            />
+        )
     }
-
     return (
 
         <ScrollView style={styles.scrollContainer}>
