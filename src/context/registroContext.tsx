@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-
+// ==============================================================================
 type Registro = {
     CPF: string;
     matricula: string;
@@ -37,19 +37,19 @@ type Registro = {
     tipo3: string;
     qtdeCarga: string;
 };
-
+// ==============================================================================
 type RegistroContextType = {
     registros: Registro[];
     adicionarRegistro: (novoRegistro: Registro) => void;
     limparRegistros: () => void;
 };
-
+// ==============================================================================
 const RegistroContext = createContext<RegistroContextType | undefined>(undefined);
-
+// ==============================================================================
 interface RegistroProviderProps {
     children: ReactNode;
 }
-
+// ==============================================================================
 export const RegistroProvider: React.FC<RegistroProviderProps> = ({ children }) => {
     const [registros, setRegistros] = useState<Registro[]>([]);
 
@@ -67,7 +67,7 @@ export const RegistroProvider: React.FC<RegistroProviderProps> = ({ children }) 
         </RegistroContext.Provider>
     );
 };
-
+// ==============================================================================
 export const useRegistro = () => {
     const context = useContext(RegistroContext);
     if (!context) {

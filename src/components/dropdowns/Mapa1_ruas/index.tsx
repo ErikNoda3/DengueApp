@@ -55,7 +55,7 @@ export function Mapa1_ruas({ value, onChange }: OpcoesProps) {
                 labelField="label"
                 valueField="value"
                 placeholder="Selecione"
-                // searchPlaceholder="Digite..."
+                searchPlaceholder="Digite..."
                 value={value}
                 onChange={item => {
                     onChange(item.value);

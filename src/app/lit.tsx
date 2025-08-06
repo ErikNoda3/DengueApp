@@ -74,6 +74,41 @@ export default function Lit() {
     const [tipo3, setTipo3] = useState('');
     const [qtdeCarga, setQtdeCarga] = useState('');
 
+    // Limpar os campos apos preenchimento
+    function limparCampos() {
+        setSequencia('');
+        setLado('');
+        setNome('');
+        setNumero('');
+        setSeq('');
+        setComplemento('');
+        setTipo('');
+        setVisita('');
+        setPendencia('');
+        setDepositos('');
+        setImovel('');
+        setTipo1('');
+        setQtdeGrama1('');
+        setQtdeDep1('');
+        setTipo2('');
+        setQtdeGrama2('');
+        setQtdeDep2('');
+        setTipo3('');
+        setQtdeCarga('');
+        setNA1('');
+        setNA2('');
+        setNB('');
+        setNC('');
+        setND1('');
+        setND2('');
+        setNE('');
+        setAmostraInicial('');
+        setAmostrafinal('');
+        setQuantidadeTubitos('');
+        setHora(new Date());
+    }
+
+
     // ====================Salva os registros==================================================================
     function salvarRegistro() {
         // if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
@@ -126,36 +161,7 @@ export default function Lit() {
 
         // Resetando os campos após salvar
 
-        setSequencia('');
-        setLado('');
-        setNome('');
-        setNumero('');
-        setSeq('');
-        setComplemento('');
-        setHora(new Date());
-        setTipo('');
-        setVisita('');
-        setPendencia('');
-        setDepositos('');
-        setImovel('');
-        setTipo1('');
-        setQtdeGrama1('');
-        setQtdeDep1('');
-        setTipo2('');
-        setQtdeGrama2('');
-        setQtdeDep2('');
-        setTipo3('');
-        setQtdeCarga('');
-        setNA1('');
-        setNA2('');
-        setNB('');
-        setNC('');
-        setND1('');
-        setND2('');
-        setNE('');
-        setAmostraInicial('');
-        setAmostrafinal('');
-        setQuantidadeTubitos('');
+        limparCampos();
 
 
     }
@@ -175,7 +181,9 @@ export default function Lit() {
 
         const conteudo = header + linhas.join("\n")
 
-        const caminho = FileSystem.documentDirectory + 'LI+T.csv'
+        const dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`
+        const caminho = FileSystem.documentDirectory + `registro-${dataFormatada}.csv`
+
 
         await FileSystem.writeAsStringAsync(caminho, conteudo, {
             encoding: FileSystem.EncodingType.UTF8
@@ -192,40 +200,8 @@ export default function Lit() {
 
         // Limpar os campos após exportação
 
-        setSequencia('');
-        setLado('');
-        setNome('');
-        setNumero('');
-        setSeq('');
-        setComplemento('');
-        setHora(new Date());
-        setTipo('');
-        setVisita('');
-        setPendencia('');
-        setDepositos('');
-        setImovel('');
-        setTipo1('');
-        setQtdeGrama1('');
-        setQtdeDep1('');
-        setTipo2('');
-        setQtdeGrama2('');
-        setQtdeDep2('');
-        setTipo3('');
-        setQtdeCarga('');
-        setNA1('');
-        setNA2('');
-        setNB('');
-        setNC('');
-        setND1('');
-        setND2('');
-        setNE('');
-        setAmostraInicial('');
-        setAmostrafinal('');
-        setQuantidadeTubitos('');
-
-
+        limparCampos();
     }
-
     // =====================================================================================================================
     return (
 
@@ -330,7 +306,8 @@ export default function Lit() {
 
 
                 <InitialButton title="Salvar Registro" onPress={salvarRegistro} />
-                <InitialButton title="Visualizar Registros" onPress={() => router.push("/registrosSalvos")} />
+
+                <InitialButton title="Visualizar Registros" onPress={() => router.push({ pathname: "/registrosSalvos", params: { mapa: mapa } })} />
                 <InitialButton title="Exportar CSV" onPress={exportarCSV} />
                 <BackButton title="Voltar" onPress={() => { router.back() }} />
             </View>

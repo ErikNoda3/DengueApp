@@ -1,10 +1,13 @@
 import { View, Text, Alert, ScrollView, Pressable } from "react-native";
 import { useRegistro } from "../context/registroContext";
 import { styles } from "../styles/styles"
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 
 export default function RegistrosSalvos() {
     const { registros, limparRegistros, adicionarRegistro } = useRegistro()
+    const params = useLocalSearchParams()
+    const [mapa, setMapa] = useState(params.mapa);
 
     const excluirRegistro = (index: number) => {
         Alert.alert("Confirmar", "Deseja excluir esse registro?", [
@@ -48,7 +51,9 @@ export default function RegistrosSalvos() {
                         ))}
 
                         <View style={[styles.cell, { flexDirection: 'row' }]}>
-                            <Pressable onPress={() => router.push(`/editarRegistro?index=${index}`)}>
+
+                            {/* <Pressable onPress={() => router.push(`/editarRegistro?index=${index}`}> */}
+                            <Pressable onPress={() => router.push(`/editarRegistro?index=${index}&mapa=${mapa}`)}>
                                 <Text style={styles.link}>Editar</Text>
                             </Pressable>
                             <Pressable onPress={() => excluirRegistro(index)}>

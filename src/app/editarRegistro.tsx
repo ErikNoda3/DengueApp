@@ -10,10 +10,19 @@ import { InitialButton } from "@/components/Buttons/initialButton";
 import { BackButton } from "@/components/Buttons/backButton";
 import { styles } from "../styles/styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Mapa1_ruas } from "@/components/dropdowns/Mapa1_ruas";
+import { Mapa2_ruas } from "@/components/dropdowns/Mapa2_ruas";
+import { Mapa3_ruas } from "@/components/dropdowns/Mapa3_ruas";
+import { Mapa4_ruas } from "@/components/dropdowns/Mapa4_ruas";
+import { Mapa5_ruas } from "@/components/dropdowns/Mapa5_ruas";
+import { Mapa6_ruas } from "@/components/dropdowns/Mapa6_ruas";
+import { Mapa7_ruas } from "@/components/dropdowns/Mapa7_ruas";
 
 export default function EditarRegistro() {
-    const [mostrarHora, setMostrarHora] = useState(false);
 
+    const params = useLocalSearchParams()
+    const [mapa, setMapa] = useState(params.mapa);
+    const [mostrarHora, setMostrarHora] = useState(false);
     const { registros, limparRegistros, adicionarRegistro } = useRegistro();
     const { index } = useLocalSearchParams();
 
@@ -27,11 +36,11 @@ export default function EditarRegistro() {
     }
 
     const salvarAlteracoes = () => {
-        const obrigatorios = [form.sequencia, form.lado, form.numero, form.seq, form.complemento, form.tipo, form.hora, form.visita, form.pendencia];
-        if (!obrigatorios.every(Boolean)) {
-            Alert.alert("Campos obrigatórios faltando", "Preencha todos os campos obrigatórios.");
-            return;
-        }
+        // const obrigatorios = [form.sequencia, form.lado, form.numero, form.seq, form.complemento, form.tipo, form.hora, form.visita, form.pendencia];
+        // if (!obrigatorios.every(Boolean)) {
+        //     Alert.alert("Campos obrigatórios faltando", "Preencha todos os campos obrigatórios.");
+        //     return;
+        // }
         registros[i] = form;
         limparRegistros();
         registros.forEach(r => adicionarRegistro(r));
@@ -44,7 +53,9 @@ export default function EditarRegistro() {
         <ScrollView style={styles.scrollContainer}>
             <View style={styles.container}>
                 <Text style={styles.title}>Editar Registro</Text>
-
+                <Text style={styles.title}>Li + T</Text>
+                <Text style={styles.quarteiraoText}>CPF: {form.CPF}</Text>
+                <Text style={styles.quarteiraoText}>Matricula: {form.matricula}</Text>
                 <Text style={styles.quarteiraoText}>Quarteirão selecionado: {form.quarteirao}</Text>
 
                 <View style={styles.containerData}>
@@ -54,7 +65,28 @@ export default function EditarRegistro() {
 
                 <LitInput label="Sequência" keyboardType="numeric" value={form.sequencia} onChangeText={(v) => atualizarCampo('sequencia', v)} />
                 <LitInput label="Lado" keyboardType="numeric" value={form.lado} onChangeText={(v) => atualizarCampo('lado', v)} />
-                <LitInput label="Nome do logradouro" value={form.nome} onChangeText={(v) => atualizarCampo('nome', v)} />
+
+                {mapa === '1' &&
+                    <Mapa1_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '2' &&
+                    <Mapa2_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '3' &&
+                    <Mapa3_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '4' &&
+                    <Mapa4_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '5' &&
+                    <Mapa5_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '6' &&
+                    <Mapa6_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
+                {mapa === '7' &&
+                    <Mapa7_ruas value={form.nome} onChange={(v) => atualizarCampo('nome', v)} />
+                }
                 <LitInput label="Número" keyboardType="numeric" value={form.numero} onChangeText={(v) => atualizarCampo('numero', v)} />
                 <LitInput label="Seq." keyboardType="numeric" value={form.seq} onChangeText={(v) => atualizarCampo('seq', v)} />
                 <LitInput label="Complemento" value={form.complemento} onChangeText={(v) => atualizarCampo('complemento', v)} />
