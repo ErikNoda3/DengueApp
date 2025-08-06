@@ -9,9 +9,11 @@ A proposta se concentra inicialmente na cidade de Apucarana-PR, mas apresenta po
 O sistema ainda permitirá a visualização, edição e exclusão de registros antes do envio, e possibilitará a exportação dos dados para planilhas que podem ser sincronizadas com a nuvem. O desenvolvimento será feito com tecnologias modernas, como React Native, Expo e TypeScript, garantindo compatibilidade com dispositivos Android. A iniciativa também está alinhada ao plano da prefeitura local de adquirir tablets para uso dos agentes de campo, oferecendo uma solução concreta, funcional e adaptada à realidade do serviço público de saúde.
 
 ## Layout tablet
-![Web 1](https://github.com/acenelio/assets/raw/main/sds1/web1.png)
+![mobile 1](https://github.com/ErikNoda3/assets/blob/main/1.png)
 
-![Web 2](https://github.com/acenelio/assets/raw/main/sds1/web2.png)
+![mobile 2](https://github.com/ErikNoda3/assets/blob/main/2.png)
+
+![mobile 3](https://github.com/ErikNoda3/assets/blob/main/3.png)
 
 # Tecnologias utilizadas
 ## Back end
@@ -28,4 +30,5 @@ O sistema ainda permitirá a visualização, edição e exclusão de registros a
 Erik Noda
 
 www.linkedin.com/in/erik-noda
+
 
