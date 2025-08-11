@@ -1,7 +1,7 @@
 import { Dropdown } from 'react-native-element-dropdown';
 import { styles } from './styles';
 import { View, Text } from 'react-native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type OpcoesProps = {
     value: string | null;
@@ -42,6 +42,7 @@ export function Mapa1_ruas({ value, onChange }: OpcoesProps) {
 
 
     return (
+
         <View style={styles.container}>
             <Text style={styles.title}>Nome do logradouro</Text>
             <Dropdown
@@ -57,6 +58,7 @@ export function Mapa1_ruas({ value, onChange }: OpcoesProps) {
                 placeholder="Selecione"
                 searchPlaceholder="Digite..."
                 value={value}
+                keyboardAvoiding={true}
                 onChange={item => {
                     onChange(item.value);
                 }}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Alert, Button } from "react-native"
+import { View, Text, ScrollView, Alert, Button, KeyboardAvoidingView } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
 import { useRegistro } from "../context/registroContext"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -19,6 +19,7 @@ import { Mapa4_ruas } from "@/components/dropdowns/Mapa4_ruas";
 import { Mapa5_ruas } from "@/components/dropdowns/Mapa5_ruas";
 import { Mapa6_ruas } from "@/components/dropdowns/Mapa6_ruas";
 import { Mapa7_ruas } from "@/components/dropdowns/Mapa7_ruas";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Lit() {
     const params = useLocalSearchParams()
@@ -111,11 +112,24 @@ export default function Lit() {
 
     // ====================Salva os registros==================================================================
     function salvarRegistro() {
-        // if (!sequencia || !lado || !numero || !seq || !complemento || !tipo || !hora || !visita || !pendencia) {
-        //     Alert.alert("Campos sem informação", "Preencha todos os campos");
-        //     return;
-        // }
+        const obrigatorios = [sequencia, lado, numero, seq, complemento, tipo, hora, visita, pendencia];
+        if (!obrigatorios.every(Boolean)) {
+            Alert.alert("Alguns campos estão sem informações", "Continuar mesmo assim?", [
+                { text: "Voltar", style: "cancel" },
+                {
+                    text: "Continuar",
+                    style: "destructive",
+                    onPress: () => {
+                        executarSalvamento()
+                    }
+                }
+            ])
+            return;
+        }
+        executarSalvamento();
+    }
 
+    function executarSalvamento() {
         const novoRegistro = {
             CPF: CPF,
             matricula: matricula,
@@ -160,10 +174,7 @@ export default function Lit() {
         Alert.alert("Sucesso!", "Registro salvo");
 
         // Resetando os campos após salvar
-
         limparCampos();
-
-
     }
 
     // ==========================Exporta CSV============================================================
@@ -203,6 +214,7 @@ export default function Lit() {
         limparCampos();
     }
     // =====================================================================================================================
+
     return (
 
         <ScrollView style={styles.scrollContainer}>
@@ -243,6 +255,7 @@ export default function Lit() {
                 {mapa === '7' &&
                     <Mapa7_ruas value={nome} onChange={setNome} />
                 }
+
                 <LitInput label="Número" keyboardType="numeric" placeholder="Digite o número" value={numero} onChangeText={setNumero} />
                 <LitInput label="Seq." keyboardType="numeric" placeholder="Digite a sequência" value={seq} onChangeText={setSeq} />
                 <LitInput label="Complemento" placeholder="Digite o complemento" value={complemento} onChangeText={setComplemento} />
